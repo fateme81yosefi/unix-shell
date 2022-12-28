@@ -326,6 +326,7 @@ void parseSpace(char* str, char** parsed){
 }
 
 int processString(char* str, char** parsed){
+    
     parseSpace(str, parsed);//kalamato joda mikone
 
     if (MyCmdHandle(parsed)) return 0;
