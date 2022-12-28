@@ -13,6 +13,7 @@
 #define MAX_COMMAND_SUPP 1000 
 
 void create_Shell(){
+
     printf("\n\n\n\n______________________");
     printf("\n\n\n\t____Welcome To My SHELL____");
     printf("\n\n\n\n_______________________"
@@ -21,9 +22,11 @@ void create_Shell(){
     printf("\n\n\nYour UserName is: @%s", username);
     printf("\n");
     sleep(1);
+
 }
 
 int gettingInput(char* strInput){
+
     char* CmdBuffer;
   
     CmdBuffer = readline("\n>>> ");
@@ -39,7 +42,7 @@ int gettingInput(char* strInput){
 
 void PrintCurrentPath(){
     char dir[1024];
-    getdir(dir, sizeof(dir));
+    getcwd(dir, sizeof(dir));
     printf("\nDir: %s", dir);
 }
 
@@ -222,8 +225,8 @@ int readTenLine(){
     fclose(textfile);
 }
 
-void execArgs(char** parsed)
-{
+void execArgs(char** parsed){
+
     // Forking a child
     pid_t p1 = fork(); 
   
@@ -242,8 +245,8 @@ void execArgs(char** parsed)
     }
 }
 
-int MyCmdHandle(char** parsed)
-{
+int MyCmdHandle(char** parsed){
+
     int NumberMyCmd = 6, i, switchOwnArg = 0;
     char* MyCmdList[NumberMyCmd];
     char* username;
@@ -254,8 +257,8 @@ int MyCmdHandle(char** parsed)
     MyCmdList[3] = "dc";
     MyCmdList[4] = "cle";
     MyCmdList[5] = "rtle";
+    MyCmdList[6] = "cd";
 
-  
     for (i = 0; i < NumberMyCmd; i++) {
         if (strcmp(parsed[0], MyCmdList[i]) == 0) {
             switchOwnArg = i + 1;
@@ -265,15 +268,39 @@ int MyCmdHandle(char** parsed)
 
      pid_t p1 = fork(); 
 
-
     if (p1 < 0) {
         printf("\nForking problem occure...");
         return 0;
     } else if (p1 == 0) {
-        if (execvp(parsed[0], parsed) < 0) {//
-            printf("\n problem was Happend...");
-        }
-        exit(0);
+      switch (switchOwnArg) {
+
+          case 1:
+              getFirstWordInEachLine();
+              return 1;
+
+          case 2:
+              getMostRepeatedWord();
+              return 1;
+          case 3:
+              removeEmptySpace();
+              return 1;
+          case 4:
+              deleteComment();
+              return 1;
+          case 5:
+              countLine();
+              return 1;
+          case 6:
+              readTenLine();
+              return 1;
+          case 7:
+              // chdir();
+              return 1;
+          default:
+              break;
+    }
+  
+    return 0;
     } else {
         // waiting for child to terminate
         wait(NULL); 
@@ -284,8 +311,8 @@ int MyCmdHandle(char** parsed)
     return 0;
 }
 
-void parseSpace(char* str, char** parsed)
-{
+void parseSpace(char* str, char** parsed){
+
     int i;
   
     for (i = 0; i < MAX_COMMAND_SUPP; i++) {
@@ -323,5 +350,3 @@ int main() {
             execArgs(parsedArgs);
     }
     return 0;
-
-}
