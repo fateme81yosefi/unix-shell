@@ -10,7 +10,7 @@
        ./a.out
        
        
-       
+-  Instructions :
 <table >
   <tr>
     <th>Instruction  </th>
