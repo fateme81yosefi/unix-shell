@@ -40,5 +40,17 @@
     <td> readTenLine    </td>
     <td> rtle</td>
     </tr>
+     <tr>
+    <td> cd    </td>
+    <td> cd</td>
+    </tr>
+    <tr>
+    <td> ls    </td>
+    <td> ls</td>
+    </tr>
+    <tr>
+    <td> pwd    </td>
+    <td> pwd</td>
+    </tr>
 </table>       
 
